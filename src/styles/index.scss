@@ -4,6 +4,7 @@
 @import './element-ui.scss';
 @import './sidebar.scss';
 @import './btn.scss';
+@import './form.scss';
 
 #app {
   width: 100vw;
@@ -40,8 +41,8 @@
   align-items: center !important;
 }
 
-.abs-center {
-  margin: auto !important;
+.flex-wrap {
+  flex-wrap: wrap !important;
 }
 
 body {
@@ -212,3 +213,18 @@ aside {
 .multiselect--active {
   z-index: 1000 !important;
 }
+
+.container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolBtn {
+  margin: 0 5px;
+  cursor: pointer;
+  flex: none;
+}
+

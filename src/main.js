@@ -5,6 +5,11 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+import formCreate from 'form-create/element'
+Vue.use(formCreate)
+
+import './global-compo' // register global components
+
 import '@/styles/index.scss' // global css
 
 import App from './App.vue'
