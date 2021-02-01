@@ -1,10 +1,10 @@
-<template>
-  <h1>Table</h1>
-</template>
-
 <script>
+import SearchList from '@/components/SearchList'
+import mixins from './mixins'
 export default {
-  name: 'Table'
+  name: 'Table',
+  extends: SearchList,
+  mixins: [mixins]
 }
 </script>
 

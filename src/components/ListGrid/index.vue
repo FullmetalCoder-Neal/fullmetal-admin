@@ -1,6 +1,7 @@
 <template>
   <el-table
-    :data="rows"
+    ref="table"
+    :data="dataList"
     border
     stripe
     height="100"
@@ -59,8 +60,21 @@ export default {
   },
   data() {
     return {
-      cols: this.columns,
-      rows: this.dataList
+      cols: this.columns
+    }
+  },
+  watch: {
+    columns: {
+      handler(to, from) {
+        this.cols = to.filter(item => {
+          return item.show
+        })
+        this.$nextTick(() => {
+          this.$refs.table.doLayout()
+        })
+      },
+      immediate: true,
+      deep: true
     }
   },
   mounted() {
@@ -69,16 +83,16 @@ export default {
   },
   methods: {
     // 行拖拽
-    rowDrag() {
-      const tbody = document.querySelector('.el-table__body-wrapper tbody')
-      const _this = this
-      Sortable.create(tbody, {
-        onEnd({ newIndex, oldIndex }) {
-          const currRow = _this.rows.splice(oldIndex, 1)[0]
-          _this.rows.splice(newIndex, 0, currRow)
-        }
-      })
-    },
+    // rowDrag() {
+    //   const tbody = document.querySelector('.el-table__body-wrapper tbody')
+    //   const _this = this
+    //   Sortable.create(tbody, {
+    //     onEnd({ newIndex, oldIndex }) {
+    //       const currRow = _this.rows.splice(oldIndex, 1)[0]
+    //       _this.rows.splice(newIndex, 0, currRow)
+    //     }
+    //   })
+    // },
     // 列拖拽
     columnDrag() {
       const wrapperTr = document.querySelector('.el-table__header-wrapper tr')
