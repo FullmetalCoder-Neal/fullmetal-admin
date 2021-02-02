@@ -8,11 +8,11 @@ let isRelogin = true // to fix repeat relogin when multiple request failed
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API
 axios.defaults.timeout = 5000
 
-// create an axios instance for login
-const tokenService = axios.create()
+// create an axios instance for request without token
+const service = axios.create()
 
 // response interceptor
-tokenService.interceptors.response.use(
+service.interceptors.response.use(
   response => {
     const res = response.data
     return res
@@ -28,11 +28,11 @@ tokenService.interceptors.response.use(
   }
 )
 
-// create an axios instance for request
-const service = axios.create()
+// create an axios instance for request with token
+const tokenService = axios.create()
 
 // request interceptor
-service.interceptors.request.use(
+tokenService.interceptors.request.use(
   config => {
     if (store.getters.token) {
       config.headers.common['Authorization'] = 'Bearer ' + getToken()
@@ -46,7 +46,7 @@ service.interceptors.request.use(
 )
 
 // response interceptor
-service.interceptors.response.use(
+tokenService.interceptors.response.use(
   response => {
     const res = response.data
 

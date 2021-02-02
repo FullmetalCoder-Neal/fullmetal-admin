@@ -1,3 +1,4 @@
+import { getList } from '@/api/list'
 export default {
   data() {
     return {
@@ -68,140 +69,6 @@ export default {
           show: false
         }
       ],
-      dataList: [
-        {
-          id: 0,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 1,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 2,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 3,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 4,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 5,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 6,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 7,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 8,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 9,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 10,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 11,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 12,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 13,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 14,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 15,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 16,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 17,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 18,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 19,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 20,
-          name: 'Peter',
-          age: 30,
-          gender: 'male'
-        },
-        {
-          id: 21,
-          name: 'Neal',
-          age: 30,
-          gender: 'male'
-        }
-      ],
       buttons: [
         {
           name: '审核',
@@ -210,9 +77,25 @@ export default {
       ]
     }
   },
+  created() {
+  },
+  watch: {
+    currentPage: {
+      handler(to, from) {
+        this.search()
+      },
+      immediate: true
+    }
+  },
   methods: {
     audit() {
       console.log(1)
+    },
+    search() {
+      getList({}, { page: this.currentPage, size: this.pageSize }).then(res => {
+        this.dataList = res.data.dataList
+        this.total = res.data.totalCount
+      })
     }
   }
 }

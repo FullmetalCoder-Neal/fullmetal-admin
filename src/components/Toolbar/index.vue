@@ -27,7 +27,7 @@
       >
         <button
           class="last-pager"
-          :disabled="currentPage===Math.ceil(total/pageSize)"
+          :disabled="currentPage===Math.ceil(total/pageSize) || total===0"
           @click="jumpPage('0')"
         >>>|</button>
       </el-pagination>
@@ -51,15 +51,15 @@ export default {
   props: {
     currentPage: {
       type: Number,
-      required: true
+      default: 1
     },
     pageSize: {
       type: Number,
-      required: true
+      default: 20
     },
     total: {
       type: Number,
-      required: true
+      default: 0
     },
     showAdd: {
       type: Boolean,

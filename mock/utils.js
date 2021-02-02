@@ -20,6 +20,11 @@ function param2Obj(url) {
   return obj
 }
 
+function pagination(data, page, size) {
+  return data.slice((page - 1) * size, page * size)
+}
+
 module.exports = {
-  param2Obj
+  param2Obj,
+  pagination
 }

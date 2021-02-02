@@ -1,7 +1,7 @@
-import { tokenService as tokenRequest, userService as userRequest } from '@/utils/request'
+import { service as Request, userService as userRequest } from '@/utils/request'
 
 export function login(data) {
-  return tokenRequest({
+  return Request({
     url: '/fullmetal-admin/user/login',
     method: 'post',
     data

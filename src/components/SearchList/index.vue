@@ -62,7 +62,7 @@ export default {
         submitBtn: false
       },
       currentPage: 1,
-      total: 399,
+      total: 0,
       pageSize: 20,
       columns: [],
       dataList: [],
