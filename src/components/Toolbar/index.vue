@@ -1,40 +1,47 @@
 <template>
-  <div class="toolbar">
-    <button v-if="showAdd" class="toolBtn">新增</button>
-    <button v-if="showDel" class="toolBtn">删除</button>
-    <button v-if="showSearch" class="toolBtn">查询</button>
-    <slot />
-    <el-pagination
-      :current-page="currentPage"
-      :page-sizes="[10, 20, 25, 50, 100]"
-      :page-size="pageSize"
-      layout="slot, prev, jumper, next"
-      :total="total"
-      @prev-click="handlePrevClick"
-      @next-click="handleNextClick"
-    >
-      <!-- eslint-disable-next-line -->
+  <div class="wrap flex flex-between flex-mid">
+    <div class="toolbar">
+      <el-button v-if="showAdd" type="primary" size="mini" class="toolBtn">新增</el-button>
+      <el-button v-if="showDel" type="primary" size="mini" class="toolBtn">删除</el-button>
+      <el-button v-if="showSearch" type="primary" size="mini" class="toolBtn">查询</el-button>
+      <slot />
+      <el-pagination
+        :current-page="currentPage"
+        :page-sizes="[10, 20, 25, 50, 100]"
+        :page-size="pageSize"
+        layout="slot, prev, jumper, next"
+        :total="total"
+        @prev-click="handlePrevClick"
+        @next-click="handleNextClick"
+      >
+        <!-- eslint-disable-next-line -->
       <button class="first-pager" :disabled="currentPage===1" @click="jumpPage('1')">|<<</button>
-    </el-pagination>
-    <el-pagination
-      :current-page="currentPage"
-      :page-sizes="[10, 20, 25, 50, 100]"
-      :page-size="pageSize"
-      layout="slot, sizes"
-      :total="total"
-      @size-change="handleSizeChange"
-    >
-      <button class="last-pager" :disabled="currentPage===Math.ceil(total/pageSize)" @click="jumpPage('0')">>>|</button>
-    </el-pagination>
-    <el-pagination
-      :current-page="currentPage"
-      :page-sizes="[10, 20, 25, 50, 100]"
-      :page-size="pageSize"
-      layout="slot, total"
-      :total="total"
-    >
-      <div class="total-pages">共 {{ Math.ceil(total/pageSize) }} 页</div>
-    </el-pagination>
+      </el-pagination>
+      <el-pagination
+        :current-page="currentPage"
+        :page-sizes="[10, 20, 25, 50, 100]"
+        :page-size="pageSize"
+        layout="slot, sizes"
+        :total="total"
+        @size-change="handleSizeChange"
+      >
+        <button
+          class="last-pager"
+          :disabled="currentPage===Math.ceil(total/pageSize)"
+          @click="jumpPage('0')"
+        >>>|</button>
+      </el-pagination>
+      <el-pagination
+        :current-page="currentPage"
+        :page-sizes="[10, 20, 25, 50, 100]"
+        :page-size="pageSize"
+        layout="slot, total"
+        :total="total"
+      >
+        <div class="total-pages">共 {{ Math.ceil(total/pageSize) }} 页</div>
+      </el-pagination>
+    </div>
+    <slot name="settings" />
   </div>
 </template>
 
@@ -92,10 +99,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.toolbar {
-  display: flex;
+.wrap {
   border-top: solid 1px #000;
   border-bottom: solid 1px #000;
+}
+
+.toolbar {
+  display: flex;
   align-items: center;
   width: 100%;
   overflow-x: auto;

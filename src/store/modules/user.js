@@ -3,10 +3,9 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
-  const userInfo = JSON.parse(localStorage.getItem('userInfo')) || { userName: 'nobody', unitName: '不正常人类研究中心' }
   return {
     token: getToken(),
-    userInfo: userInfo,
+    userInfo: { userName: '', unitName: '' },
     refreshUserInfo: true
   }
 }
@@ -23,7 +22,6 @@ const mutations = {
   SET_USER: (state, userInfo) => {
     state.userInfo = userInfo
     state.refreshUserInfo = false
-    localStorage.setItem('userInfo', JSON.stringify(userInfo))
   }
 }
 
@@ -64,7 +62,6 @@ const actions = {
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
       removeToken() // must remove  token  first
-      localStorage.removeItem('userInfo')
       resetRouter()
       commit('RESET_STATE')
       resolve()
@@ -75,7 +72,6 @@ const actions = {
   resetToken({ commit }) {
     return new Promise(resolve => {
       removeToken() // must remove  token  first
-      localStorage.removeItem('userInfo')
       commit('RESET_STATE')
       resolve()
     })

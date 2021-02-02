@@ -30,16 +30,7 @@
       min-width="50px"
     />
 
-    <el-table-column
-      fixed="right"
-      label="操作"
-      width="100"
-    >
-      <template>
-        <el-button type="text" size="small">查看</el-button>
-        <el-button type="text" size="small">编辑</el-button>
-      </template>
-    </el-table-column>
+    <slot />
 
   </el-table>
 </template>
